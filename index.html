@@ -37,6 +37,10 @@
             font-size: 18px;
             border: 1px solid red;
         }
+        .bt{
+            width: 24%;
+            font-size: 20px;
+        }
 
     </style>
 </head>
@@ -48,6 +52,7 @@
     </div>
     <div id="puzzle">
         <h3>穴埋め</h3>
+        <h5>青だったら正解、赤だったら間違い</h5>
         <p id="puzzle_text"></p>
     </div>
 
@@ -64,10 +69,10 @@
     </select> -->
 
 
-    <input type="button" value="作成" id="change_bt">
-    <input type="button" value="検査" id="check_bt">
-    <input type="button" value="答えを見る" id="ans_bt">
-    <input type="button" value="削除" id="clear_bt">
+    <input type="button" value="作成" id="change_bt" class="bt">
+    <input type="button" value="チェック" id="check_bt" class="bt">
+    <input type="button" value="解答を見る" id="ans_bt" class="bt">
+    <input type="button" value="削除" id="clear_bt" class="bt">
 
 
     <script>
