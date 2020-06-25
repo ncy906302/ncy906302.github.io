@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>助詞の穴埋め問題作成ツール</title>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+        }
+        div{
+            width: 100%;
+            float: left;
+        }
+        #content{
+            border: 1px solid blue;
+        }
+
+        #puzzle{
+            border: 1px solid red;
+        }
+        textarea{
+            font-size: 14px;
+            width: 100%;
+            /* border: none; */
+        }
+        #puzzle_text{
+            padding: 10px;
+        }
+        .kotae{
+            font-size: 14px;
+            width: 14px;
+        }
+
+    </style>
+</head>
+<body>
+    <h2>助詞の穴埋め問題作成ツール</h2>
+    <div id="content">
+        <h3>文章</h3>
+        <textarea cols="50" rows="20"></textarea>
+    </div>
+    <div id="puzzle">
+        <h3>穴埋め</h3>
+        <p id="puzzle_text"></p>
+    </div>
+
+    <!-- //「が・の・を・に・へ・と・より・から・で・や」の10種類 -->
+    <!-- <select name="YourLocation">
+        　<option value="0">が</option>
+        　<option value="1">の</option>
+        　<option value="2">を</option>
+        　<option value="3">に</option>
+        　<option value="4">へ</option>
+        　<option value="5">と</option>
+        　<option value="6">で</option>
+        　<option value="7">や</option>
+    </select> -->
+
+
+    <input type="button" value="作成" id="change_bt">
+    <input type="button" value="検査" id="check_bt">
+    <input type="button" value="答えを見る" id="ans_bt">
+    <input type="button" value="削除" id="clear_bt">
+
+
+    <script>
+        var textArea = document.getElementsByTagName('textarea')[0];
+        var bt1 = document.getElementById("change_bt");
+        var bt2 = document.getElementById("check_bt");
+        var bt3 = document.getElementById("ans_bt");
+        var bt4 = document.getElementById("clear_bt");
+        var puzzle_text = document.getElementById("puzzle_text");
+        var ans_arr = [];
+        var kotae_arr = [];
+        var kotaes = null;
+        var select_html = '<select class="select"><option value="0">が</option><option value="1">の</option><option value="2">を</option><option value="3">に</option><option value="4">へ</option><option value="5">と</option><option value="6">で</option><option value="7">や</option></select>';
+
+
+        bt1.onclick = function () {
+            ans_arr = [];
+            var s = textArea.value.toString();    
+            console.log(s);
+            for(var i=0;i<s.length;i++){
+                var temp_t = s[i];
+                console.log(temp_t);
+                //「が・の・を・に・へ・と・より・から・で・や」の10種類
+                if(temp_t == "が" || temp_t == "の" || 
+                temp_t == "を" || temp_t == "に"||
+                temp_t == "へ"||temp_t == "と"||
+                temp_t == "で"||temp_t == "や"
+                ){
+                    var input_tag = '<input type="text" col="1" rows="1" class="kotae">'
+                    s = s.substring(0, i) + input_tag + s.substring(i + 1);
+                    ans_arr.push(temp_t);
+                }
+            }
+            kotaes = document.getElementsByClassName('kotae');
+            puzzle_text.innerHTML = s;
+            console.log(ans_arr);
+        };
+
+        bt2.onclick = function(){
+            kotae_arr=[]
+            if(kotaes!=null){
+                for(var i=0;i<kotaes.length;i++){
+                    kotae_arr.push(kotaes[i].value);
+                }
+            }
+            for(var i=0;i<ans_arr.length;i++){
+                if(ans_arr[i]==kotae_arr[i]){
+                    kotaes[i].style.color = "blue";
+                }else{
+                    kotaes[i].style.color = "red";
+                }
+            }
+        }
+
+        bt3.onclick = function(){
+            for(var i=0;i<ans_arr.length;i++){
+                if(ans_arr[i]==kotae_arr[i]){
+                    kotaes[i].style.color = "blue";
+                }else{
+                    kotaes[i].value = ans_arr[i];
+                    kotaes[i].style.color = "green";
+                }
+            }
+
+        }
+
+        bt4.onclick = function(){
+            for(var i=0;i<ans_arr.length;i++){
+                kotaes[i].value = '';
+            }
+        }
+    </script>
+    <!-- <script src="joshiPuzzle.js"></script> -->
+</body>
+</html>
